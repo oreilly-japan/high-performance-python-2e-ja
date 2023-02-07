@@ -67,6 +67,24 @@ pipfile-deprecated-finder = ["pip-shims (>=0.5.2)", "pipreqs", "requirementslib"
 plugins = ["setuptools"]
 
 [[package]]
+name = "line-profiler"
+version = "4.0.2"
+description = "Line-by-line profiler"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.extras]
+all = ["pytest", "pytest-cov", "coverage", "ubelt", "cython", "scikit-build", "cmake", "ninja", "cibuildwheel", "cibuildwheel", "cibuildwheel", "cibuildwheel", "cibuildwheel", "cibuildwheel", "ipython", "ipython"]
+all-strict = ["pytest (==4.6.11)", "pytest-cov (==2.10.1)", "coverage[toml] (==5.3)", "ubelt (==1.0.1)", "Cython (==3.0.0a11)", "scikit-build (==0.11.1)", "cmake (==3.21.2)", "ninja (==1.10.2)", "cibuildwheel (==2.11.2)", "cibuildwheel (==2.11.2)", "cibuildwheel (==2.8.1)", "cibuildwheel (==2.11.2)", "cibuildwheel (==2.11.2)", "cibuildwheel (==2.11.2)", "IPython (==0.13)", "IPython (==0.13)"]
+build = ["cython", "scikit-build", "cmake", "ninja", "cibuildwheel", "cibuildwheel", "cibuildwheel", "cibuildwheel", "cibuildwheel", "cibuildwheel"]
+build-strict = ["Cython (==3.0.0a11)", "scikit-build (==0.11.1)", "cmake (==3.21.2)", "ninja (==1.10.2)", "cibuildwheel (==2.11.2)", "cibuildwheel (==2.11.2)", "cibuildwheel (==2.8.1)", "cibuildwheel (==2.11.2)", "cibuildwheel (==2.11.2)", "cibuildwheel (==2.11.2)"]
+ipython-strict = ["IPython (==0.13)", "IPython (==0.13)"]
+ipython = ["ipython", "ipython"]
+tests = ["pytest", "pytest-cov", "coverage", "ubelt", "ipython", "ipython"]
+tests-strict = ["pytest (==4.6.11)", "pytest-cov (==2.10.1)", "coverage[toml] (==5.3)", "ubelt (==1.0.1)", "IPython (==0.13)", "IPython (==0.13)"]
+
+[[package]]
 name = "mccabe"
 version = "0.7.0"
 description = "McCabe checker, plugin for flake8"
@@ -124,6 +142,18 @@ description = "Utility library for gitignore style pattern matching of file path
 category = "dev"
 optional = false
 python-versions = ">=3.7"
+
+[[package]]
+name = "pillow"
+version = "9.4.0"
+description = "Python Imaging Library (Fork)"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+docs = ["furo", "olefile", "sphinx (>=2.4)", "sphinx-copybutton", "sphinx-inline-tabs", "sphinx-issues (>=3.0.1)", "sphinx-removed-in", "sphinxext-opengraph"]
+tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "packaging", "pyroma", "pytest", "pytest-cov", "pytest-timeout"]
 
 [[package]]
 name = "platformdirs"
@@ -209,7 +239,7 @@ python-versions = ">=3.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "00c912f65fccba9697e73f99785809165973838ac5e3f6aef2080708b68200fc"
+content-hash = "6493692bd7acf5a780d7d4de44bee6b286bf757ba3d25294e14c1e280d41b029"
 
 [metadata.files]
 black = []
@@ -220,6 +250,7 @@ click = [
 colorama = []
 flake8 = []
 isort = []
+line-profiler = []
 mccabe = []
 mslex = []
 mypy = []
@@ -229,6 +260,7 @@ mypy-extensions = [
 ]
 packaging = []
 pathspec = []
+pillow = []
 platformdirs = []
 psutil = []
 pycodestyle = []
