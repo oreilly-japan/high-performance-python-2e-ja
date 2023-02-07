@@ -5,9 +5,10 @@ description = "The code for high performance Python"
 authors = ["Hironsan"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "<3.12,>=3.8"
 line-profiler = "^4.0.2"
 Pillow = "^9.4.0"
+scipy = "^1.10.0"
 
 [tool.poetry.dev-dependencies]
 black = "^23.1.0"
@@ -28,7 +29,7 @@ include = '\.pyi?$'
 [tool.flake8]
 max-line-length = 120
 max-complexity = 18
-ignore = "E203,E266,W503,"
+ignore = "E203,E266,W503,E731"
 filename = "*.py"
 
 [tool.mypy]
