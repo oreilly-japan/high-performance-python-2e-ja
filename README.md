@@ -13,10 +13,10 @@
 各章ごとにノートブックを用意しています。また、それぞれのノートブックはGoogle Colaboratoryを使いブラウザで実行できます。
 
 - [1章のサンプルコード](https://colab.research.google.com/drive/1_2IGFvI2VcQ-dWAqDB7NvyVtXFy-Xx3r?usp=sharing)
-<!-- - [2章のサンプルコード](./ch02/README.md)
-- [3章のサンプルコード](./ch03/README.md)
-- [4章のサンプルコード](./ch04/README.md)
-- [5章のサンプルコード](./ch05/README.md)
+- [2章のサンプルコード](https://colab.research.google.com/drive/1vFL6x7x4or-0V365Oow_FVZMW_Y-LMTS?usp=sharing)
+- [3章のサンプルコード](https://colab.research.google.com/drive/15YZolvboJJPXHNo--FPoRmN60TxcWck7?usp=sharing)
+- [4章のサンプルコード](https://colab.research.google.com/drive/1gUfeBJAwkj-znbIIYgu9Zb6NIXddVZCI?usp=sharing)
+<!-- - [5章のサンプルコード](./ch05/README.md)
 - [6章のサンプルコード](./ch06/README.md)
 - [7章のサンプルコード](./ch07/README.md)
 - [8章のサンプルコード](./ch08/README.md)
