@@ -19,10 +19,10 @@
 - [5章のサンプルコード](https://colab.research.google.com/drive/1FMsdYXHwYVmfoKbf8-Pq-DJkfU7TMzGF?usp=sharing)
 - [6章のサンプルコード](https://colab.research.google.com/drive/172lSkTbm1Bhh9_l21PurxvweiYyeh8bg?usp=sharing)
 - [7章のサンプルコード](https://colab.research.google.com/drive/1i9iayVsCwSAc17Q8L7V8f50sbuqR1upe?usp=sharing)
-- [8章のサンプルコード]()
-- [9章のサンプルコード]()
+- [8章のサンプルコード](https://colab.research.google.com/drive/1YYjqO3YP7DsF1VwoDawb4sewY6Mu2G0D?usp=sharing)
+- [9章のサンプルコード](https://colab.research.google.com/drive/1sMUo9Ox75MxqlyySjPUAZo1suuXNaohP?usp=sharing)
 - [10章のサンプルコード](https://colab.research.google.com/drive/1IIz3-yVPk71LXB-xhaNZA93XNRaLZ_B_?usp=sharing)
-- [11章のサンプルコード]()
+- [11章のサンプルコード](https://colab.research.google.com/drive/1bvejDrif_PgaRpELVumvZ6pMmo4a7pjw?usp=sharing)
 - [12章のサンプルコード](https://colab.research.google.com/drive/139L880dwNM-9cYjOci-ajZvIrW-Oe-qp?usp=sharing)
 
 ## 正誤表
