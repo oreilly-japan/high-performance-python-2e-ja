@@ -1,3 +1,4 @@
+import argparse
 import asyncio
 import random
 import string
@@ -40,10 +41,14 @@ async def run_experiment(base_url, num_iter=1000):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-p", "--port", type=int, default=8080)
+    args = parser.parse_args()
+
     loop = asyncio.get_event_loop()
     delay = 100
     num_iter = 1000
-    base_url = f"http://127.0.0.1:8080/add?name=asyncio&delay={delay}&"
+    base_url = f"http://127.0.0.1:{args.port}/add?name=asyncio&delay={delay}&"
 
     start = time.time()
     result = loop.run_until_complete(run_experiment(base_url, num_iter))

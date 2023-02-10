@@ -1,3 +1,4 @@
+import argparse
 import json
 import random
 import string
@@ -49,6 +50,10 @@ def run_experiment(base_url, num_iter=500, parallel_requests=100):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-p", "--port", type=int, default=8080)
+    args = parser.parse_args()
+
     try:
         data = json.load(open("parallel_requests.json"))
     except IOError:
@@ -59,7 +64,7 @@ if __name__ == "__main__":
 
         data = {}
         for delay in range(50, 1000, 250):
-            base_url = f"http://127.0.0.1:8080/add?name=concurrency_test&delay={delay}&"
+            base_url = f"http://127.0.0.1:{args.port}/add?name=concurrency_test&delay={delay}&"
             data[delay] = []
             for parallel_requests in range(1, num_iter, 25):
                 start = time.time()

@@ -1,3 +1,4 @@
+import argparse
 import asyncio
 import json
 import random
@@ -15,11 +16,11 @@ import uvloop
 
 
 class AsyncBatcher(object):
-    def __init__(self, batch_size):
+    def __init__(self, batch_size, url):
         self.batch_size = batch_size
         self.batch = []
         self.client_session = None
-        self.url = f"http://127.0.0.1:8080/add"
+        self.url = url
 
     def __enter__(self):
         return self
@@ -48,18 +49,16 @@ class AsyncBatcher(object):
             return await response.json()
 
 
-def save_result_serial(result):
-    url = f"http://127.0.0.1:8080/add"
+def save_result_serial(result, url):
     response = requests.post(url, data=result)
     return response.json()
 
 
-def save_result_aiohttp(client_session):
+def save_result_aiohttp(client_session, url):
     sem = asyncio.Semaphore(100)
 
     async def saver(result):
         nonlocal sem, client_session
-        url = f"http://127.0.0.1:8080/add"
         async with sem:
             async with client_session.post(url, data=result) as response:
                 return await response.json()
@@ -74,14 +73,14 @@ def do_task(i, difficulty):
     return result.decode("utf8")
 
 
-def calculate_task_serial(num_iter, task_difficulty):
+def calculate_task_serial(num_iter, task_difficulty, url):
     for i in range(num_iter):
         result = do_task(i, task_difficulty)
-        save_result_serial(result)
+        save_result_serial(result, url)
 
 
-def calculate_task_batch(num_iter, task_difficulty):
-    batcher = AsyncBatcher(100)
+def calculate_task_batch(num_iter, task_difficulty, url):
+    batcher = AsyncBatcher(100, url)
     for i in range(num_iter):
         result = do_task(i, task_difficulty)
         batcher.save(result)
@@ -100,10 +99,10 @@ def calculate_task_fileio(num_iter, task_difficulty):
             fd.write(f"{result}\n")
 
 
-async def calculate_task_aiohttp(num_iter, task_difficulty):
+async def calculate_task_aiohttp(num_iter, task_difficulty, url):
     tasks = []
     async with aiohttp.ClientSession() as client_session:
-        saver = save_result_aiohttp(client_session)
+        saver = save_result_aiohttp(client_session, url)
         for i in range(num_iter):
             result = do_task(i, task_difficulty)
             task = asyncio.create_task(saver(result))  # <1>
@@ -112,11 +111,11 @@ async def calculate_task_aiohttp(num_iter, task_difficulty):
         await asyncio.wait(tasks)  # <3>
 
 
-async def calculate_task_aiohttp_timer(num_iter, task_difficulty):
+async def calculate_task_aiohttp_timer(num_iter, task_difficulty, url):
     tasks = []
     times = []
     async with aiohttp.ClientSession() as client_session:
-        saver = save_result_aiohttp(client_session)
+        saver = save_result_aiohttp(client_session, url)
 
         async def saver_time(result):
             nonlocal saver, times
@@ -162,7 +161,12 @@ def async_callgraph():
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-p", "--port", type=int, default=8080)
+    args = parser.parse_args()
+
     num_iter = 1000
+    url = f"http://127.0.0.1:{args.port}/add"
 
     try:
         data = json.load(open("workloads.json"))
@@ -187,7 +191,7 @@ if __name__ == "__main__":
             data["no IO"].append((num_iter, difficulty, t))
 
             start = time.perf_counter()
-            calculate_task_batch(num_iter, difficulty)
+            calculate_task_batch(num_iter, difficulty, url)
             t = time.perf_counter() - start
             print("batch code took: {} {}s".format(num_iter, t))
             data["batches"].append((num_iter, difficulty, t))
@@ -199,21 +203,21 @@ if __name__ == "__main__":
             data["file IO"].append((num_iter, difficulty, t))
 
             start = time.perf_counter()
-            task = calculate_task_aiohttp(num_iter, difficulty)
+            task = calculate_task_aiohttp(num_iter, difficulty, url)
             _aloop.run_until_complete(task)
             t = time.perf_counter() - start
             print("Async code took: {} {}s".format(num_iter, t))
             data["async"].append((num_iter, difficulty, t))
 
             start = time.perf_counter()
-            task = calculate_task_aiohttp(num_iter, difficulty)
+            task = calculate_task_aiohttp(num_iter, difficulty, url)
             _uvloop.run_until_complete(task)
             t = time.perf_counter() - start
             print("Async+uvloop code took: {} {}s".format(num_iter, t))
             data["async+uvloop"].append((num_iter, difficulty, t))
 
             start = time.perf_counter()
-            calculate_task_serial(num_iter, difficulty)
+            calculate_task_serial(num_iter, difficulty, url)
             t = time.perf_counter() - start
             print("Serial code took: {} {}s".format(num_iter, t))
             data["serial"].append((num_iter, difficulty, t))

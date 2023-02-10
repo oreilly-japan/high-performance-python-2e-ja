@@ -1,3 +1,4 @@
+import argparse
 import random
 import string
 import time
@@ -44,9 +45,13 @@ def run_experiment(base_url, num_iter=1000):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-p", "--port", type=int, default=8080)
+    args = parser.parse_args()
+
     delay = 100
     num_iter = 1000
-    base_url = f"http://127.0.0.1:8080/add?name=gevent&delay={delay}&"
+    base_url = f"http://127.0.0.1:{args.port}/add?name=gevent&delay={delay}&"
 
     start = time.time()
     result = run_experiment(base_url, num_iter)

@@ -1,3 +1,4 @@
+import argparse
 import random
 import string
 import time
@@ -41,9 +42,13 @@ def _finish_run_experiment(responses, callback):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-p", "--port", type=int, default=8080)
+    args = parser.parse_args()
+
     delay = 100
     num_iter = 500
-    base_url = f"http://127.0.0.1:8080/add?name=tornado_callback&delay={delay}&"
+    base_url = f"http://127.0.0.1:{args.port}/add?name=tornado_callback&delay={delay}&"
 
     _ioloop = ioloop.IOLoop.instance()
     _ioloop.add_callback(run_experiment, base_url, num_iter, _ioloop.stop)
